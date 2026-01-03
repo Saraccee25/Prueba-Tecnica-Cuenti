@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const CORS_PROXY = "https://allorigins.win/raw?url=";
+const CORS_PROXY = "https://api.allorigins.win/raw?url=";
 const TOP_PODCASTS_URL = "https://itunes.apple.com/us/rss/toppodcasts/limit=10/genre=1310/json";
 
 export const getTopPodcasts = async () => {

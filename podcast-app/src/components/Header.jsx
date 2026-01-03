@@ -4,11 +4,11 @@ import '../styles/Header.css'
 function Header() {
     return (
         <header className="header">
-            <div classname= "header-container">
-                <Link to="/" classname="header-title">Podcaster</Link>
+            <div className= "header-container">
+                <Link to="/" className="header-title">Podcaster</Link>
 
                 <nav className="header-nav">
-                    <Link to="/" classname={` nav-link ${location.pathname === '/' ? 'active' : ''}`}>Inicio</Link>
+                    <Link to="/" className="nav-link">Inicio</Link>
                 </nav> 
             </div>
         </header>

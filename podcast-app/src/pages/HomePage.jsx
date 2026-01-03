@@ -12,7 +12,7 @@ const HomePage = () => {
     useEffect(() => {
         const fetchPodcasts = async () => {
             try{
-               const data = await getPodcasts()
+               const data = await getTopPodcasts()
                 setPodcasts(data); 
             }catch (error) {
                 console.error('Error fetching podcasts:', error);
