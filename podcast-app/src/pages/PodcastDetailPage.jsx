@@ -4,6 +4,8 @@ import Loader from "../components/Loader"
 import { getPodcastById } from "../services/podcastService"
 import { getEpisodesFromFeed } from "../services/episodeService"
 import SideBar from "../components/SideBar";
+import "../styles/PodcastDetail.css"
+
 
 
 const formatDate = (dateString) => {
