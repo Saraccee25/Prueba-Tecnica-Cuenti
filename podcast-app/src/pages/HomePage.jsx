@@ -1,9 +1,10 @@
-import { use } from 'react';
+import { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom'
 import Loader from '../components/Loader'
+import {getTopPodcasts} from '../services/podcastService'
 
 
-function HomePage() = () => {
+const HomePage = () => {
     const [podcasts, setPodcasts] = useState([]);
     const [filter, setFilter] = useState('');
     const [loading, setLoading] = useState(true);
