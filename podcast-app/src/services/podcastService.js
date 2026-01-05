@@ -5,7 +5,13 @@ const TOP_PODCASTS_URL = "https://itunes.apple.com/us/rss/toppodcasts/limit=10/g
 const LOOKUP_URL = "https://itunes.apple.com/lookup?id={id}";
 
 export const getTopPodcasts = async () => {
-    const response = await axios.get(CORS_PROXY + encodeURIComponent(TOP_PODCASTS_URL));
+    const response = await axios.get(
+        CORS_PROXY + encodeURIComponent(TOP_PODCASTS_URL),
+        {
+            timeout: 35000
+        }
+    )
+
     const entries = response.data.feed.entry;
 
     return entries.map((podcast) => ({
@@ -18,10 +24,16 @@ export const getTopPodcasts = async () => {
 };
 
 export const getPodcastById = async (podcastId) => {
-    const response = await axios.get(CORS_PROXY + encodeURIComponent(LOOKUP_URL.replace("{id}", podcastId)));
+    const response = await axios.get(
+        CORS_PROXY + encodeURIComponent(LOOKUP_URL.replace("{id}", podcastId)),
+        {
+            timeout: 35000
+        }
+    )
+
     const podcast = response.data.results[0];
 
-    if(!podcast) return null;
+    if (!podcast) return null;
 
     return {
         id: podcast.trackId || podcastId,

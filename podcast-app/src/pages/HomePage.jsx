@@ -14,6 +14,7 @@ const HomePage = () => {
     const fetchPodcasts = async () => {
       try {
         const data = await getTopPodcasts()
+        console.log(data)
         setPodcasts(data)
       } catch (error) {
         console.error("Error fetching podcasts:", error)

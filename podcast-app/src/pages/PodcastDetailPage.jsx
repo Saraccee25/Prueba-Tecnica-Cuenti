@@ -29,9 +29,11 @@ const PodcastDetailPage = () => {
   useEffect(() => {
     const load = async () => {
       try {
+        console.log("podcastId: " + podcastId);
         const p = await getPodcastById(podcastId)
+        console.log("check de error" + p);
         setPodcast(p)
-
+        console.log("objeto" + p)
         const eps = await getEpisodesFromFeed(p.feedUrl)
         setEpisodes(eps)
       } catch (error) {
