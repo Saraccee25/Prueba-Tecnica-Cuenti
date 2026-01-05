@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import Loader from "../components/Loader"
 import Sidebar from "../components/SideBar"
 import { getPodcastById } from "../services/podcastService"
-import { getEpisodesFromFeed } from "../services/episodeService"
+import { getEpisodesFromPodcastId } from "../services/episodeService"
 
 const EpisodeDetailPage = () => {
   const { podcastId, episodeId } = useParams()
@@ -19,8 +19,8 @@ const EpisodeDetailPage = () => {
         const podcastData = await getPodcastById(podcastId)
         setPodcast(podcastData)
 
-      
-        const episodes = await getEpisodesFromFeed(podcastData.feedUrl)
+        
+        const episodes = await  getEpisodesFromPodcastId(podcastId)
 
        
         const selectedEpisode = episodes.find(

@@ -1,25 +1,21 @@
-const CORS_PROXY = "https://api.allorigins.win/raw?url=";
+import axios from "axios";
 
-export const getEpisodesFromFeed = async (feedUrl) => {
-  const response = await fetch(
-    CORS_PROXY + feedUrl
-  )
+export const getEpisodesFromPodcastId = async (podcastId) => {
+  const response = await axios.get(
+    `/api/lookup?id=${podcastId}&entity=podcastEpisode`
+  );
 
-  const xmlText = await response.text()
+  const results = response.data.results || [];
 
-  const parser = new DOMParser()
-  const xml = parser.parseFromString(xmlText, "text/xml")
+  const episodes = results.filter(
+    (item) => item.wrapperType === "podcastEpisode"
+  );
 
-  const items = Array.from(xml.querySelectorAll("item"))
-
-  return items.map((item, index) => ({
-    id: item.querySelector("guid")?.textContent || index.toString(),
-    title: item.querySelector("title")?.textContent || "",
-    description:
-      item.querySelector("description")?.textContent || "",
-    audioUrl:
-      item.querySelector("enclosure")?.getAttribute("url") || "",
-    pubDate:
-      item.querySelector("pubDate")?.textContent || "",
-  }))
-}
+  return episodes.map((episode) => ({
+    id: episode.trackId.toString(),
+    title: episode.trackName || "",
+    description: episode.description || episode.shortDescription || "",
+    audioUrl: episode.episodeUrl || "",
+    pubDate: episode.releaseDate || "",
+  }));
+};

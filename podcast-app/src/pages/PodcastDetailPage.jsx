@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom"
 import Loader from "../components/Loader"
 import { getPodcastById } from "../services/podcastService"
-import { getEpisodesFromFeed } from "../services/episodeService"
+import {  getEpisodesFromPodcastId } from "../services/episodeService"
 import SideBar from "../components/SideBar"
 import "../styles/PodcastDetail.css"
 
@@ -36,16 +36,13 @@ const PodcastDetailPage = () => {
         const podcastData = await getPodcastById(podcastId)
         console.log("Podcast cargado:", podcastData)
         setPodcast(podcastData)
+
+        const episodes = await getEpisodesFromPodcastId(podcastId)
+        console.log("Episodios cargados:", episodes)
         
-        if (podcastData.feedUrl) {
-          console.log("Cargando episodios desde feed:", podcastData.feedUrl)
-          const episodesData = await getEpisodesFromFeed(podcastData.feedUrl)
-          console.log("Episodios cargados:", episodesData)
-          setEpisodes(episodesData)
-        } else {
-          setEpisodes([])
+        setEpisodes(episodes);
         }
-      } catch (err) {
+       catch (err) {
         console.error("Error al cargar el podcast:", err)
         setError(err.message || "Error al cargar el podcast")
       } finally {
