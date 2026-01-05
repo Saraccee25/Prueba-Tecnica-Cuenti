@@ -1,8 +1,8 @@
-const CORS_PROXY = "https://api.allorigins.win/raw?url="
+const CORS_PROXY = "https://api.allorigins.win/raw?url=";
 
 export const getEpisodesFromFeed = async (feedUrl) => {
   const response = await fetch(
-    CORS_PROXY + encodeURIComponent(feedUrl)
+    CORS_PROXY + feedUrl
   )
 
   const xmlText = await response.text()
